@@ -1,5 +1,6 @@
 package com.wezaam.withdrawal.model;
 
+import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,7 +17,7 @@ public class WithdrawalScheduled {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private Long transactionId;
-    private Double amount;
+    private BigDecimal amount;
     private Instant createdAt;
     private Instant executeAt;
     private Long userId;
@@ -32,11 +33,11 @@ public class WithdrawalScheduled {
         this.id = id;
     }
 
-    public Double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

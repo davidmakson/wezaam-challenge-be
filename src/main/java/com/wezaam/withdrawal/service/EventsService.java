@@ -2,19 +2,10 @@ package com.wezaam.withdrawal.service;
 
 import com.wezaam.withdrawal.model.Withdrawal;
 import com.wezaam.withdrawal.model.WithdrawalScheduled;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
 
-@Service
-public class EventsService {
+public interface EventsService {
 
-    @Async
-    public void send(Withdrawal withdrawal) {
-        // build and send an event in message queue async
-    }
+    void send(Withdrawal withdrawal);
+    void send(WithdrawalScheduled withdrawal);
 
-    @Async
-    public void send(WithdrawalScheduled withdrawal) {
-        // build and send an event in message queue async
-    }
 }

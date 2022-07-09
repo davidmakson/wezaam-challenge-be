@@ -1,30 +1,33 @@
 package com.wezaam.withdrawal.rest;
 
 import com.wezaam.withdrawal.model.User;
-import com.wezaam.withdrawal.repository.UserRepository;
-import io.swagger.annotations.Api;
+import com.wezaam.withdrawal.service.UserService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
 
-import java.util.List;
-
-@Api
 @RestController
 public class UserController {
 
+    private UserService userService;
+    private Logger logger;
+
     @Autowired
-    private ApplicationContext context;
+    public UserController(UserService userService, Logger logger) {
+        this.userService = userService;
+        this.logger = logger;
+    }
 
     @GetMapping("/find-all-users")
     public List<User> findAll() {
-        return context.getBean(UserRepository.class).findAll();
+        return userService.findAll();
     }
 
     @GetMapping("/find-user-by-id/{id}")
     public User findById(@PathVariable Long id) {
-        return context.getBean(UserRepository.class).findById(id).orElseThrow();
+        return userService.findById(id).get();
     }
 }
